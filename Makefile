@@ -1,10 +1,10 @@
 .PHONY: test
 
-make dev:
-	npm run dev
+dev:
+	npm run start:dev
 
-make test:
+test:
 	npm run test
 
-make watch:
+watch:
 	npm run test:watch

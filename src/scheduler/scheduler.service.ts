@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { fromZonedTime } from 'date-fns-tz';
-import { IANA } from 'src/lib';
+import {
+  convertDateTimeToUTCUsingTimeZone,
+  IANA,
+  ISO8601simple,
+} from 'src/lib';
 
 @Injectable()
 export class SchedulerService {
-  convertToUTC(iso8601: string, timeZone: IANA) {
-    return fromZonedTime(iso8601, timeZone);
+  convertToUTC(iso8601: ISO8601simple, timeZone: IANA) {
+    return convertDateTimeToUTCUsingTimeZone(iso8601, timeZone);
   }
 }
