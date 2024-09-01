@@ -1,9 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SchedulerService } from './scheduler.service';
-import { format } from 'date-fns/fp';
 import { IANA, makeDateTime } from 'src/lib';
-
-const ISOWithoutTimeOffset = format("yyyy-MM-dd'T'HH:mm:ss");
 
 describe('SchedulerService', () => {
   let service: SchedulerService;
@@ -38,16 +35,13 @@ describe('SchedulerService', () => {
     const date = new Date(localDate);
     const timeZone: IANA = 'Asia/Bishkek';
 
-    const dateInUTC = service.convertToUTC(
-      ISOWithoutTimeOffset(date),
-      timeZone,
-    );
+    const dateInUTC = service.convertToUTC(makeDateTime(date), timeZone);
 
     expect(dateInUTC.toISOString()).toBe(expectedDate);
   });
 
   it('should convert time from America/New_York to UTC', () => {
-    const now = ISOWithoutTimeOffset(new Date());
+    const now = makeDateTime(new Date());
     const timeZone: IANA = 'America/New_York';
     const expectedDate = new Date(now).toISOString();
 
