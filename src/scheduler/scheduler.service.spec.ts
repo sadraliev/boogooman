@@ -1,6 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SchedulerService } from './scheduler.service';
-import { IANA, makeDateTime } from 'src/lib';
+import {
+  CreateParcelDto,
+  IANA,
+  makeDateTime,
+  makeDelivery,
+  makeParcel,
+} from 'src/lib';
 
 describe('SchedulerService', () => {
   let service: SchedulerService;
@@ -49,4 +55,38 @@ describe('SchedulerService', () => {
       expectedDate,
     );
   });
+
+  it('should make scheduler constructor for email', () => {
+    const now = makeDateTime(new Date());
+    const expectedDate = new Date(now).toISOString();
+
+    const parcelDto = {
+      type: 'email',
+      to: 'a.sadraliev@gmail.com',
+      from: 'userId',
+      message: 'hello world',
+      price: 1.0,
+      desiredDeliveryDateTime: now,
+      timeZone: 'America/New_York',
+    } satisfies CreateParcelDto;
+
+    const parcel = makeParcel(parcelDto);
+    const delivery = makeDelivery({ parcelId: 'parcelUuid', ...parcelDto });
+
+    const expected = {
+      ...parcel,
+      id: 'deliveryUuid',
+      datetime: expectedDate,
+    };
+
+    // expect(service.addToDelivery(parcel)).toBe(expected);
+    // must return delay on ms until delivery time point
+  });
+
+  // send notification (parcel) to address
+  // - make parcel
+  // - make delivery
+  // - add to Job Queue
+  // - depending on the type, send to the appropriate delivery channel.
+  //    - save delivery to DB
 });

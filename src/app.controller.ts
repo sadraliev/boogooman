@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { calculateCosts } from './lib';
 
 @Controller()
 export class AppController {
@@ -7,6 +8,10 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    const currentExchangeRate = 87.5; // Текущий курс доллара
+    const costs = calculateCosts(currentExchangeRate);
+    console.log(costs);
+
+    return costs as any;
   }
 }
