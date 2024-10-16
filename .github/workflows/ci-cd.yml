@@ -1,12 +1,15 @@
 name: CI/CD Pipeline
 
+env: 
+  DOCKER_IMAGE: ${{ secrets.DOCKER_USERNAME }}/boogoo-registry:${{ github.sha }}
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  deploy:
+  pipeline:
     runs-on: ubuntu-latest
 
     steps: 
@@ -21,7 +24,7 @@ jobs:
         echo "Step 2 completed - logged to DockerHub"
     - name: Build and Post image 
       run: | 
-        docker build . --file Dockerfile --tag sadraliev/boogoo-registry:${{ github.sha }}
+        docker build . --file Dockerfile --tag $DOCKER_IMAGE
         echo "Step 3 completed - built a new image"
-        docker push sadraliev/boogoo-registry:${{ github.sha }}
+        docker push $DOCKER_IMAGE 
         echo "Step 4 completed - pushed to DockerHub"
