@@ -21,7 +21,7 @@ jobs:
         echo "Step 2 completed - logged to DockerHub"
     - name: Build and Post image 
       run: | 
-        docker build . --file Dockerfile --tag boogooman:${{ github.sha }}
+        docker build . --file Dockerfile --tag sadraliev/boogoo-registry:${{ github.sha }}
         echo "Step 3 completed - built a new image"
-        docker push boogooman:${{ github.sha }}
+        docker push sadraliev/boogoo-registry:${{ github.sha }}
         echo "Step 4 completed - pushed to DockerHub"
