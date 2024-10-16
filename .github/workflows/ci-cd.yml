@@ -10,15 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps: 
-    - name: Checkoutc ode
-      uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v3
     - name: Print message after Checkout
       run: echo "Step 1 completed  - Checked out code"
   
     - name: Log in to Docker Hub 
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_TOKEN }}
-    - name: Print messge after DockerHub login
-      run: echo "Step 2 completed - Logged into DockerHub" 
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
+        echo "Step 2 completed - logged to DockerHub"
+    - name: Build and Post image 
+      run: | 
+        docker build . --file Dockerfile --tag boogooman:${{ github.sha }}
+        echo "Step 3 completed - built a new image"
+        docker push boogooman:${{ github.sha }}
+        echo "Step 4 completed - pushed to DockerHub"
