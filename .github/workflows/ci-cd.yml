@@ -28,5 +28,5 @@ jobs:
         echo "Step 3 completed - built a new image"
         docker push $IMAGE_TAG 
         echo "Step 4 completed - pushed to DockerHub"
-        echo "$IMAGE_TAG" > .env
+        echo "BOOGOOMAN_IMAGE_TAG=$IMAGE_TAG" > .env
         head .env
