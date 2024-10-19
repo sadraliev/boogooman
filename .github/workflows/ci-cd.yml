@@ -48,4 +48,4 @@ jobs:
         script: |
           cd /home/ubuntu/app/
           echo "IMAGE_TAG=${{env.IMAGE_TAG}}" > .env
-          cat <<EOF > /home/ubuntu/app/docker-compose.yml ${{ env.COMPOSE_CONTENT }} EOF
+          echo '${{ env.COMPOSE_CONTENT }}' > /home/ubuntu/app/docker-compose.yml
