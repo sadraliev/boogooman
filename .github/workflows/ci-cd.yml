@@ -16,12 +16,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
   
-    - name: Read docker-compose.yml into variable
-      id: read_docker_compose
-      run: |
-          COMPOSE_CONTENT=$(cat ./docker-compose.yml)
-          echo "COMPOSE_CONTENT=${COMPOSE_CONTENT}" >> $GITHUB_ENV
-          
     - name: Log in to Docker Hub 
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
@@ -43,6 +37,5 @@ jobs:
         username: ${{ secrets.VPS_USER}}  
         key: ${{ secrets.VPS_SSH}}  
         script: |
-          ls -la
-          echo "${{ env.COMPOSE_CONTENT }}" > /home/ubuntu/app/docker-compose.yml
-          
+          cd /home/ubuntu/app/
+          echo "${{env.IMAGE_TAG}} >> .env 
