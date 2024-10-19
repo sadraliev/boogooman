@@ -19,6 +19,7 @@ jobs:
     - name: Read docker-compose.yml into variable
       id: read_docker_compose
       run: |
+        echo "IMAGE_TAG=${{env.IMAGE_TAG}}" > .env
         {
           echo 'COMPOSE_CONTENT<<EOF'
           cat ./docker-compose.yml
