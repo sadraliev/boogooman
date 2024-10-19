@@ -39,5 +39,6 @@ jobs:
         username: ${{ secrets.VPS_USER}}  
         key: ${{ secrets.VPS_SSH}}  
         script: |
-          cat ./docker-compose.yml > /home/ubuntu/app/docker-compose.yml
+          ls -la
+          cat docker-compose.yml > /home/ubuntu/app/docker-compose.yml
           
