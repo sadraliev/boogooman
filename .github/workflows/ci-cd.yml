@@ -37,7 +37,7 @@ jobs:
         username: ${{ secrets.VPS_USER}}  
         key: ${{ secrets.VPS_SSH}}  
         script: |
-          cd /path/to/your/project  # Переходим в директорию проекта
+          cd /home/ubuntu/app/
           if [ -f docker-compose.yml ]; then
-            rm docker-compose.yml  # Удаляем файл, если он существует
+            rm docker-compose.yml  
           fi
