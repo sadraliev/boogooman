@@ -47,5 +47,6 @@ jobs:
         key: ${{ secrets.VPS_SSH}}  
         script: |
           cd /home/ubuntu/app/
-          echo "IMAGE_TAG=${{env.IMAGE_TAG}}" > .env
+          echo '${{ secrets.CREDS_PROD }}' > .env
+          echo "IMAGE_TAG=${{env.IMAGE_TAG}}" >> .env
           echo '${{ env.COMPOSE_CONTENT }}' > /home/ubuntu/app/docker-compose.yml
