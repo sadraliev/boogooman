@@ -38,4 +38,4 @@ jobs:
         key: ${{ secrets.VPS_SSH}}  
         script: |
           cd /home/ubuntu/app/
-          echo "${{env.IMAGE_TAG}} >> .env 
+          echo "${{env.IMAGE_TAG}}" >> .env 
