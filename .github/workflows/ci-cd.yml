@@ -24,6 +24,12 @@ jobs:
           cat ./docker-compose.yml
           echo EOF
         } >> $GITHUB_ENV
+        
+        {
+          echo 'NGINX_CONFIG<<EOF'
+          cat ./nginx.conf
+          echo EOF
+        } >> $GITHUB_ENV
   
     - name: Log in to Docker Hub 
       run: |
@@ -51,6 +57,7 @@ jobs:
           echo "${{ vars.CREDS_DEV }}" > .env
           echo "IMAGE_TAG=${{env.IMAGE_TAG}}" >> .env
           echo '${{ env.COMPOSE_CONTENT }}' > /home/ubuntu/app/docker-compose.yml
+          echo '${{ env.NGINX_CONFIG}}' > /home/ubuntu/app/nginx.conf
           docker compose pull app
           docker-compose stop app
           docker-compose up -d app
