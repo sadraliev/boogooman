@@ -47,8 +47,7 @@ jobs:
         key: ${{ secrets.VPS_SSH}}
         debug: true
         script: |
-          echo "${{ vars.CREDS_DEV }}" > creds-dev.txt 
           cd /home/ubuntu/app/
-          echo "${{ env.CREDS_DEV }}" > .env
+          echo "${{ vars.CREDS_DEV }}" > .env
           echo "IMAGE_TAG=${{env.IMAGE_TAG}}" >> .env
           echo '${{ env.COMPOSE_CONTENT }}' > /home/ubuntu/app/docker-compose.yml
