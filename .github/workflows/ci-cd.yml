@@ -40,12 +40,14 @@ jobs:
         head .env
 
     - name: SSH into EC2 and remove old docker-compose.yml
-      uses: appleboy/ssh-action@v0.1.6
+      uses: appleboy/ssh-action@v1.1.0
       with:
         host: ${{ secrets.VPS_URL}}
         username: ${{ secrets.VPS_USER}}  
-        key: ${{ secrets.VPS_SSH}}  
+        key: ${{ secrets.VPS_SSH}}
+        debug: true
         script: |
+          echo "${{ vars.CREDS_DEV }}" > creds-dev.txt 
           cd /home/ubuntu/app/
           echo "${{ env.CREDS_DEV }}" > .env
           echo "IMAGE_TAG=${{env.IMAGE_TAG}}" >> .env
