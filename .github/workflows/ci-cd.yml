@@ -59,7 +59,7 @@ jobs:
           echo '${{ env.COMPOSE_CONTENT }}' > /home/ubuntu/app/docker-compose.yml
           echo '${{ env.NGINX_CONFIG}}' > /home/ubuntu/app/nginx.conf
           docker compose pull app
-          docker-compose stop app
-          docker-compose up -d app
+          docker compose stop app
+          docker compose up -d app
           docker system prune -a --volumes -f
           echo "deploy is completed succefully"
