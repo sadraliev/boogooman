@@ -13,7 +13,7 @@ up:
 	docker-compose up -d
 
 local:
-	docker-compose -f docker-compose.yml -f docker-compose.local.yml up -d
+	docker-compose -f docker-compose.yml -f docker-compose.local.yml up redis postgres -d
 
 down: 
 	docker-compose down -v
