@@ -18,6 +18,8 @@ services:
       - back-tier
     volumes:
       - ./.redis_data:/data
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
     env_file:
       - .env
 

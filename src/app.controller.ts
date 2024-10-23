@@ -1,17 +1,16 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
-import { calculateCosts } from './lib';
+import { SchedulerService } from './scheduler/scheduler.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly schedulerService: SchedulerService) {}
 
   @Get()
   getHello(): string {
-    const currentExchangeRate = 87.5; // Текущий курс доллара
-    const costs = calculateCosts(currentExchangeRate);
-    console.log(costs);
-
-    return costs as any;
+    const time = this.schedulerService.convertToUTC(
+      new Date().toISOString(),
+      'Asia/Bishkek',
+    );
+    return time as any;
   }
 }
